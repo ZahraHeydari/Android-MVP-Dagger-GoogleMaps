@@ -1,0 +1,53 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    versionCode = 1
+    versionName = "1.0"
+    compileSdkVersion = 28
+    targetSdkVersion = 28
+    buildToolsVersion = "28.0.1"
+    minSdkVersion = 15
+    applicationId = "com.android.marketplace"
+    supportLibVersion = "28.0.0"
+    greenDaoSchemaVersion = 22
+    googleLibVersion = "15.0.1"
+    junitVersion = "4.12"
+    multidexLibVersion = "1.0.3"
+    gsonLibVersion = "2.7"
+    parcelerLibVersion = "1.1.9"
+    okhttpLibVersion = "3.8.1"
+    butterknifeLibVersion = "9.0.0-rc2"
+    retrofitLibVersion = "2.4.0"
+    constraintLayoutLibVersion = "1.1.3"
+    playServicesMapsLibVersion = "16.0.0"
+    roomLibVersion = "1.1.1"
+    parcelerLibVersion = "1.1.12"
+    daggerLibVersion = "2.13"
+    daggerAndroidLibVersion = "2.15"
+    testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
+}

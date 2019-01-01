@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MarketPlace</string>
+    <string name="categories">categories</string>
+    <string name="orders">Orders</string>
+    <string name="buy">Buy</string>
+    <string name="products">Products</string>
+    <string name="submit">Submit</string>
+</resources>

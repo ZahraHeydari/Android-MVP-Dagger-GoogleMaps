@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="2dp"
+    app:cardCornerRadius="4dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:background="@color/lightGray"
+            android:id="@+id/product_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/product_title_height_size"
+            android:padding="16dp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/darkGray"
+            android:textSize="@dimen/subheading2" />
+
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/product_buy_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/product_text_view"
+            android:layout_centerHorizontal="true"
+            android:background="@color/colorAccent"
+            android:text="@string/buy"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

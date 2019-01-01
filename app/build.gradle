@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+    signingConfigs {
+        signingConfig {
+            storeFile file(keystoreProperties['storeFile'])
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    defaultConfig {
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signingConfig
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutLibVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibVersion"
+    implementation "com.android.support:design:$supportLibVersion"
+    implementation "com.android.support:support-v4:$supportLibVersion"
+    implementation "com.jakewharton:butterknife:$butterknifeLibVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeLibVersion"
+    implementation "com.android.support:multidex:$multidexLibVersion"
+    implementation "com.google.android.gms:play-services-maps:$playServicesMapsLibVersion"
+    implementation "android.arch.persistence.room:runtime:$roomLibVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$roomLibVersion"
+    implementation "org.parceler:parceler-api:$parcelerLibVersion"
+    annotationProcessor "org.parceler:parceler:$parcelerLibVersion"
+    implementation "com.google.dagger:dagger:$daggerLibVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerLibVersion"
+    implementation "com.google.dagger:dagger-android:$daggerAndroidLibVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerLibVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerAndroidLibVersion"
+    annotationProcessor  "com.google.dagger:dagger-android-processor:$daggerLibVersion"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
