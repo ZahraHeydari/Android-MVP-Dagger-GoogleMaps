@@ -31,14 +31,18 @@ public class MapPresenterImps implements MapPresenter{
     private static final String TAG = MapPresenterImps.class.getName();
     private final MapFragmentView mMapView;
     private final OrderRepository mOrderRepository;
+    @Inject
+    LatLng mLatLng;
 
 
     @SuppressLint("RestrictedApi")
     @Inject
     public MapPresenterImps(MapFragmentView mapView,
-                            OrderRepository orderRepository) {
+                            OrderRepository orderRepository,
+                            LatLng latLng) {
         mMapView = checkNotNull(mapView, "mapView can not be null!");
         mOrderRepository = checkNotNull(orderRepository, "orderRepository can not be null!");
+        mLatLng = latLng;
     }
 
     @Override
@@ -59,9 +63,8 @@ public class MapPresenterImps implements MapPresenter{
 
     @Override
     public void setDefaultLocationOnMap(GoogleMap googleMap) {
-        // Set default location
-        LatLng latLng = new LatLng(35.745578, 51.375443);
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        if(mLatLng == null)return;
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(mLatLng));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(18));
         googleMap.getUiSettings().setZoomGesturesEnabled(true);
     }
