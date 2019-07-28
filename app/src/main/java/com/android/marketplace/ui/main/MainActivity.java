@@ -1,14 +1,12 @@
 package com.android.marketplace.ui.main;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
 
-import com.android.marketplace.OrderStatusService;
 import com.android.marketplace.R;
 import com.android.marketplace.ui.category.CategoryFragment;
 import com.android.marketplace.data.model.Product;
@@ -17,6 +15,9 @@ import com.android.marketplace.ui.order.OrderFragment;
 import com.android.marketplace.ui.product.ProductFragment;
 import com.android.marketplace.util.ActivityUtils;
 
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,7 +31,8 @@ public class MainActivity extends DaggerAppCompatActivity implements OnMainActiv
     @BindView(R.id.tab_layout)
     public TabLayout mTabLayout;
     private static final int ORDERS_TAB_INDEX = 1;
-    public static MainActivity instance;
+    private static final long DELAY_TIME = 0;
+    private static final long PERIOD_TIME = 30000;
 
 
     @Override
@@ -38,13 +40,28 @@ public class MainActivity extends DaggerAppCompatActivity implements OnMainActiv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        instance = this;
-        startService(new Intent(getBaseContext(), OrderStatusService.class));
 
         if (savedInstanceState == null) replaceByCategoryFragment();//set as a default
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.categories)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.orders)));
         mTabLayout.addOnTabSelectedListener(new OnMainTabSelectedListener());
+
+        /*
+         * Check every 30 seconds for changing the order status
+         * if there is still main activity
+         */
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+               runOnUiThread(new TimerTask() {
+                    @Override
+                    public void run() {
+                        // run main thread code
+                        changeOrdersStatus();
+                    }
+                });
+            }
+        }, DELAY_TIME, PERIOD_TIME);
 
     }
 
@@ -113,7 +130,7 @@ public class MainActivity extends DaggerAppCompatActivity implements OnMainActiv
 
     public void changeOrdersStatus() {
         Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(OrderFragment.FRAGMENT_NAME);
-        if (fragmentByTag != null && fragmentByTag instanceof OrderFragment) {
+        if (fragmentByTag instanceof OrderFragment) {
             ((OrderFragment) fragmentByTag).updateOrderList();
         }
 

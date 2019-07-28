@@ -29,7 +29,7 @@ public class OrdersAdapter extends RecyclerView.Adapter {
     private final List<Order> mOrders;
 
 
-    public OrdersAdapter(OrderFragmentView orderView, List<Order> orders) {
+    OrdersAdapter(OrderFragmentView orderView, List<Order> orders) {
         this.mOrderView = orderView;
         this.mOrders = orders;
     }
@@ -58,7 +58,7 @@ public class OrdersAdapter extends RecyclerView.Adapter {
     /**
      * holder of {@link Order}
      */
-    public class OrderViewHolder extends RecyclerView.ViewHolder {
+    class OrderViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.order_title_text_view)
         TextView mTitleTextView;
@@ -67,7 +67,7 @@ public class OrdersAdapter extends RecyclerView.Adapter {
         @BindView(R.id.order_status_text_view)
         TextView mStatusTextView;
 
-        public OrderViewHolder(View view) {
+        OrderViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
@@ -77,7 +77,7 @@ public class OrdersAdapter extends RecyclerView.Adapter {
          *
          * @param order
          */
-        public void onBind(final Order order) {
+        void onBind(final Order order) {
             mTitleTextView.setText(order.getTitle());
             mAddressTextView.setText(order.getFormattedAddressLine());
             mStatusTextView.setText(order.getFormattedStatus());

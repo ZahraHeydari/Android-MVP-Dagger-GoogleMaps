@@ -29,6 +29,7 @@ import dagger.android.support.DaggerFragment;
 
 public class OrderFragment extends DaggerFragment implements OrderFragmentView {
 
+
     public static final String FRAGMENT_NAME = OrderFragment.class.getSimpleName();
     private static final String TAG = OrderFragment.class.getName();
     private static final long DELAY_TIME = 0;

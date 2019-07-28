@@ -1,11 +1,14 @@
-package com.android.marketplace.ui.map;
+package com.android.marketplace.di.provider;
 
 
 import android.content.Context;
 import android.location.Geocoder;
 
-import com.android.marketplace.data.source.OrderRepository;
+import com.android.marketplace.data.repository.OrderRepository;
 import com.android.marketplace.data.source.local.AppDataBase;
+import com.android.marketplace.ui.map.MapFragmentView;
+import com.android.marketplace.ui.map.MapPresenter;
+import com.android.marketplace.ui.map.MapPresenterImps;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Locale;
@@ -14,7 +17,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class MapFragmentModule {
+public class MapFragmentProvider {
 
     @Provides
     static MapPresenter provideMapPresenter(MapFragmentView mapFragmentView,

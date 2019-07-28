@@ -3,12 +3,11 @@ package com.android.marketplace.ui.map;
 import android.annotation.SuppressLint;
 import android.location.Address;
 import android.location.Geocoder;
-import android.util.Log;
 
 
 import com.android.marketplace.data.model.Order;
 import com.android.marketplace.data.model.Product;
-import com.android.marketplace.data.source.OrderRepository;
+import com.android.marketplace.data.repository.OrderRepository;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;

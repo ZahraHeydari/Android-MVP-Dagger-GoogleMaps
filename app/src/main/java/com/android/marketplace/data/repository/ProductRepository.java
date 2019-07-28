@@ -1,4 +1,4 @@
-package com.android.marketplace.data.source;
+package com.android.marketplace.data.repository;
 
 import com.android.marketplace.data.model.Product;
 import com.android.marketplace.ui.product.ProductPresenterImp;
@@ -18,7 +18,7 @@ import javax.inject.Inject;
  */
 public class ProductRepository {
 
-    List<Product> productList = new ArrayList<>();
+    private List<Product> productList = new ArrayList<>();
 
     @Inject
     public ProductRepository() {

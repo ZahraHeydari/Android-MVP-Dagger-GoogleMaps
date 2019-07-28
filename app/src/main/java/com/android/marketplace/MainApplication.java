@@ -4,8 +4,8 @@ package com.android.marketplace;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
-import com.android.marketplace.di.AppComponent;
-import com.android.marketplace.di.DaggerAppComponent;
+import com.android.marketplace.di.component.AppComponent;
+import com.android.marketplace.di.component.DaggerAppComponent;
 
 import dagger.android.AndroidInjector;
 import dagger.android.DaggerApplication;

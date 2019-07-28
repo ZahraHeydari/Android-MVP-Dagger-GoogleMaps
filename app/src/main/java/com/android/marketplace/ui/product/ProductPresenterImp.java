@@ -3,7 +3,7 @@ package com.android.marketplace.ui.product;
 import android.annotation.SuppressLint;
 
 import com.android.marketplace.data.model.Product;
-import com.android.marketplace.data.source.ProductRepository;
+import com.android.marketplace.data.repository.ProductRepository;
 
 import java.util.List;
 

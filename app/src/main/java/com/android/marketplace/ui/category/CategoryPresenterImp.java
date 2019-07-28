@@ -3,7 +3,7 @@ package com.android.marketplace.ui.category;
 import android.annotation.SuppressLint;
 
 import com.android.marketplace.data.model.Category;
-import com.android.marketplace.data.source.CategoryRepository;
+import com.android.marketplace.data.repository.CategoryRepository;
 
 import java.util.List;
 

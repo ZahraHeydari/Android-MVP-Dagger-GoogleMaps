@@ -1,8 +1,9 @@
-package com.android.marketplace.di;
+package com.android.marketplace.di.component;
 
 import android.app.Application;
 
 import com.android.marketplace.MainApplication;
+import com.android.marketplace.di.builder.ActivityBuilder;
 import com.android.marketplace.di.module.AppModule;
 import com.android.marketplace.di.module.DataBaseModule;
 

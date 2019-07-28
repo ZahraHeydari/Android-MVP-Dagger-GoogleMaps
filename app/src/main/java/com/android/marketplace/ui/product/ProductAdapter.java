@@ -31,7 +31,7 @@ public class ProductAdapter extends RecyclerView.Adapter {
     private final List<Product> mProducts;
 
 
-    public ProductAdapter(ProductFragmentView productView, List<Product> products) {
+    ProductAdapter(ProductFragmentView productView, List<Product> products) {
         this.mProductView = productView;
         this.mProducts = products;
     }
@@ -60,14 +60,14 @@ public class ProductAdapter extends RecyclerView.Adapter {
     /**
      * The holder of {@link Product}
      */
-    public class ProductViewHolder extends RecyclerView.ViewHolder {
+    class ProductViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.product_text_view)
         TextView mTextView;
         @BindView(R.id.product_buy_button)
         AppCompatButton mBuyButton;
 
-        public ProductViewHolder(View view) {
+        ProductViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
@@ -77,7 +77,7 @@ public class ProductAdapter extends RecyclerView.Adapter {
          *
          * @param product
          */
-        public void onBind(final Product product) {
+        void onBind(final Product product) {
             mBuyButton.setOnClickListener(new OnBuyButtonClickListener(product));
             mTextView.setText(product.getTitle());
         }
@@ -89,7 +89,7 @@ public class ProductAdapter extends RecyclerView.Adapter {
 
             private final Product product;
 
-            public OnBuyButtonClickListener(Product product) {
+            OnBuyButtonClickListener(Product product) {
                 this.product = product;
             }
 

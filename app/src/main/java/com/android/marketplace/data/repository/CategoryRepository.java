@@ -1,4 +1,4 @@
-package com.android.marketplace.data.source;
+package com.android.marketplace.data.repository;
 
 import com.android.marketplace.ui.category.CategoryPresenterImp;
 import com.android.marketplace.data.model.Category;

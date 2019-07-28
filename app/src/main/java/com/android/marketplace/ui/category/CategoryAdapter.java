@@ -57,12 +57,12 @@ public class CategoryAdapter extends RecyclerView.Adapter {
     /**
      * holder of {@link Category}
      */
-    public class CategoryViewHolder extends RecyclerView.ViewHolder {
+    class CategoryViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.category_text_view)
         TextView mTextView;
 
-        public CategoryViewHolder(View view) {
+        CategoryViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
@@ -72,7 +72,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
          *
          * @param category
          */
-        public void onBind(final Category category) {
+        void onBind(final Category category) {
             itemView.setOnClickListener(new OnRootCategoryClickListener(category));
             mTextView.setText(category.getTitle());
         }
@@ -84,7 +84,7 @@ public class CategoryAdapter extends RecyclerView.Adapter {
 
             private final Category category;
 
-            public OnRootCategoryClickListener(Category category) {
+            OnRootCategoryClickListener(Category category) {
                 this.category = category;
             }
 
