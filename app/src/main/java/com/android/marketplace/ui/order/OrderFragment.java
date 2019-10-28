@@ -66,7 +66,7 @@ public class OrderFragment extends DaggerFragment implements OrderFragmentView {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_order, container, false);
         ButterKnife.bind(this, root);
-        mAdapter = new OrdersAdapter(this, orderList);
+        mAdapter = new OrdersAdapter(orderList);
         mRecyclerView.setAdapter(mAdapter);
 
         /*

@@ -25,12 +25,10 @@ public class OrdersAdapter extends RecyclerView.Adapter {
 
 
     private static final String TAG = OrdersAdapter.class.getSimpleName();
-    private final OrderFragmentView mOrderView;
     private final List<Order> mOrders;
 
 
-    OrdersAdapter(OrderFragmentView orderView, List<Order> orders) {
-        this.mOrderView = orderView;
+    OrdersAdapter(List<Order> orders) {
         this.mOrders = orders;
     }
 

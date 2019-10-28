@@ -1,4 +1,4 @@
-# MarketPlace
+# Android-MVP-Sample (MarketPlace)
 
 Shopping Mobile Application
 
