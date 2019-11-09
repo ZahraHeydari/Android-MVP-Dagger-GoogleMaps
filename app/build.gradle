@@ -47,6 +47,8 @@ dependencies {
     implementation "com.android.support:support-v4:$supportLibVersion"
     implementation "com.jakewharton:butterknife:$butterknifeLibVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknifeLibVersion"
+    implementation "android.arch.lifecycle:extensions:$arch_version"
+    implementation "android.arch.lifecycle:runtime:$arch_version"
     implementation "com.android.support:multidex:$multidexLibVersion"
     implementation "com.google.android.gms:play-services-maps:$playServicesMapsLibVersion"
     implementation "android.arch.persistence.room:runtime:$roomLibVersion"

@@ -6,11 +6,16 @@ public class Category {
     private int id;
     private String title;
 
-    public Category() {
-
+   /* static {
+        System.out.println("Category");
     }
 
+    public Category() {
+        System.out.println("Constructor");
+    }*/
+
     public Category(int id, String title) {
+        System.out.println("2nd Constructor");
         this.id = id;
         this.title = title;
     }

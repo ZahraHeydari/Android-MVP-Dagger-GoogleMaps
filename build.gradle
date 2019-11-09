@@ -49,5 +49,6 @@ ext {
     parcelerLibVersion = "1.1.12"
     daggerLibVersion = "2.13"
     daggerAndroidLibVersion = "2.15"
+    arch_version = "1.1.1"
     testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
 }

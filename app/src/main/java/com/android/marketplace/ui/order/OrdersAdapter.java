@@ -53,6 +53,12 @@ public class OrdersAdapter extends RecyclerView.Adapter {
         return mOrders.size();
     }
 
+    public void updateData(List<Order> orders) {
+        mOrders.clear();
+        mOrders.addAll(orders);
+        this.notifyDataSetChanged();
+    }
+
     /**
      * holder of {@link Order}
      */

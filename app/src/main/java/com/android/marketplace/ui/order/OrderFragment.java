@@ -104,10 +104,8 @@ public class OrderFragment extends DaggerFragment implements OrderFragmentView {
     @Override
     public void setResult(List<Order> orders) {
         Log.d(TAG, "setResult() called with: orders = [" + orders + "]");
-        orderList.clear();
-        orderList.addAll(orders);
-        if (mAdapter != null) {
-            mAdapter.notifyDataSetChanged();
+        if(mAdapter!=null) {
+            mAdapter.updateData(orders);
         }
     }
 

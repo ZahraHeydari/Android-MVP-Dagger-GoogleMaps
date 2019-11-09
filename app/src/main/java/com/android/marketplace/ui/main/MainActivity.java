@@ -1,38 +1,57 @@
 package com.android.marketplace.ui.main;
 
 
+import android.arch.lifecycle.LifecycleOwner;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-
 import com.android.marketplace.R;
-import com.android.marketplace.ui.category.CategoryFragment;
 import com.android.marketplace.data.model.Product;
+import com.android.marketplace.ui.category.CategoryFragment;
 import com.android.marketplace.ui.map.MapFragment;
 import com.android.marketplace.ui.order.OrderFragment;
 import com.android.marketplace.ui.product.ProductFragment;
 import com.android.marketplace.util.ActivityUtils;
-
-
-import java.util.Timer;
-import java.util.TimerTask;
+import com.android.marketplace.util.OrderStatusService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
 
 
-public class MainActivity extends DaggerAppCompatActivity implements OnMainActivityCallback {
+public class MainActivity extends DaggerAppCompatActivity implements OnMainActivityCallback, LifecycleOwner {
 
 
     private static final String TAG = MainActivity.class.getName();
     @BindView(R.id.tab_layout)
     public TabLayout mTabLayout;
+    private Intent intentService;
     private static final int ORDERS_TAB_INDEX = 1;
-    private static final long DELAY_TIME = 0;
-    private static final long PERIOD_TIME = 30000;
+    private ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d(TAG, "onServiceConnected() called with: name = [" + name + "], service = [" + service + "]");
+            ((OrderStatusService.MyBinder) service).getService().isNeededToUpdate.observe(MainActivity.this, aBoolean -> {
+                Log.d(TAG, "onChanged() called with: aBoolean = [" + aBoolean + "]");
+                if (aBoolean != null && aBoolean) {
+                    changeOrdersStatus();
+                }
+            });
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.d(TAG, "onServiceDisconnected() called with: name = [" + name + "]");
+
+        }
+    };
 
 
     @Override
@@ -40,29 +59,25 @@ public class MainActivity extends DaggerAppCompatActivity implements OnMainActiv
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        intentService = new Intent(MainActivity.this, OrderStatusService.class);
 
         if (savedInstanceState == null) replaceByCategoryFragment();//set as a default
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.categories)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.orders)));
         mTabLayout.addOnTabSelectedListener(new OnMainTabSelectedListener());
 
-        /*
-         * Check every 30 seconds for changing the order status
-         * if there is still main activity
-         */
-        new Timer().scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-               runOnUiThread(new TimerTask() {
-                    @Override
-                    public void run() {
-                        // run main thread code
-                        changeOrdersStatus();
-                    }
-                });
-            }
-        }, DELAY_TIME, PERIOD_TIME);
+        registerService();
 
+    }
+
+    public void registerService() {
+        startService(intentService);
+        bindService(intentService, mServiceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    public void unregisterService() {
+        stopService(intentService);
+        unbindService(mServiceConnection);
     }
 
 
@@ -152,5 +167,12 @@ public class MainActivity extends DaggerAppCompatActivity implements OnMainActiv
         public void onTabReselected(TabLayout.Tab tab) {
             Log.d(TAG, "onTabReselected() called with: tab = [" + tab + "]");
         }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterService();
     }
 }

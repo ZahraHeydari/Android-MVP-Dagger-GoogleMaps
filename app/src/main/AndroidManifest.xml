@@ -22,6 +22,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <service android:name=".util.OrderStatusService"/>
+
 
         <!-- Google MAP API key -->
         <meta-data
